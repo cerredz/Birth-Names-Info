@@ -4,3 +4,33 @@
   background-size: cover;
   background-position: center;
 }
+
+.underline {
+  position: relative;
+}
+
+.underline::before {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  background: #22c55e;
+  width: 100%;
+}
+
+.enter-name:focus {
+  outline: none;
+}
+
+.enter-name-container {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.enter-name-container::before {
+  position: absolute;
+  content: "";
+  inset: -8px;
+  background: #90dfad;
+  border-radius: inherit;
+  box-shadow: 0 0 4rem #22c55e;
+  opacity: 0.5;
+}
