@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const nameSchema = new mongoose.Schema({
-  Name: {
+  name: {
     type: String,
     required: true,
   },
 });
 
-const Name = mongoose.model("Name", nameSchema);
-export default Name;
+const Names = mongoose.model("Name", nameSchema);
+export default Names;

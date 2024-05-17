@@ -1,19 +1,19 @@
 import mongoose from "mongoose";
 
 const birthSchema = new mongoose.Schema({
-  Name: {
+  name: {
     type: String,
     required: true,
   },
-  Year: {
+  year: {
+    type: Number,
+    required: true,
+  },
+  gender: {
     type: String,
     required: true,
   },
-  Gender: {
-    type: String,
-    required: true,
-  },
-  Count: {
+  count: {
     type: Number,
     required: true,
   },

@@ -25,10 +25,10 @@ export const typeDefs = gql`
 export const typeDefs = gql`
   type Birth {
     id: ID!
-    Name: String!
-    Year: String!
-    Gender: String!
-    Count: Int!
+    name: String!
+    year: String!
+    gender: String!
+    count: Int!
   }
   type NameCount {
     name: String!
@@ -37,9 +37,9 @@ export const typeDefs = gql`
   }
   type Years { # almost like the Birth Type, just organized by year
     id: Int! # actual year as the ID
-    Names: [NameCount!]!
-    Total_Names: Int!
-    Total_Births: Int!
+    names: [NameCount!]!
+    total_names: Int!
+    total_births: Int!
   }
   type Name { # collection of all the different unique names
     id: ID!
