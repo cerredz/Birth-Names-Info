@@ -49,5 +49,6 @@ export const typeDefs = gql`
   type Query {
     welcome: String
     getBirths: [Birth!]!
+    getSimiliarNames(name: String): [Name!]!
   }
 `;
