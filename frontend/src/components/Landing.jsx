@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import "../styles/landing.css";
 import { GiPolarStar } from "react-icons/gi";
@@ -6,6 +6,7 @@ import { GoSearch } from "react-icons/go";
 import { motion } from "framer-motion";
 
 const Landing = () => {
+  const [name, setName] = useState("");
   return (
     <div className="">
       <Navbar />
@@ -35,11 +36,13 @@ const Landing = () => {
             <div className="flex flex-row md:w-[500px] items-center justify-between bg-white py-2 px-6 rounded-2xl relative ">
               <input
                 placeholder="Enter a Name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
                 className="z-10 bg-white enter-name text-lg tracking-wider font-medium"
               ></input>
 
               <motion.button
-                onTap={{ scale: 0.9 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={() => console.log("Hello World")}
                 className="z-10 flex flex-row items-center justify-center gap-2 bg-green-500 py-2 text-lg px-4 rounded-md font-medium tracking-wide shadow-lg shadow-green-500/30 transition duration-500 hover:transition hover:duration-500 hover:bg-green-600"
               >
