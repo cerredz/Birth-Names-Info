@@ -4,12 +4,15 @@ import mongoose from "mongoose";
 import Births from "./models/Births.js";
 import Names from "./models/Names.js";
 import Years from "./models/Years.js";
+import Rankings from "./models/Ranking.js";
+
 // file to convert the CSV file into a MongoDB database, will create a births, names, and year collection (only have to run each helper function once)
 export const initializeDatabase = async () => {
   try {
     //await fillBirths();
     //await fillNames();
     //await fillYears();
+    //await fillRankings();
   } catch (error) {
     console.log("Error initializing the datbase", error);
   }
@@ -120,5 +123,65 @@ const fillYears = async (filePath) => {
       });
   } catch (error) {
     console.log("Error initializing the Years Database", error);
+  }
+};
+
+// uses the Years and Names database to rank the popularity of all the names, and then stores these results into the MongoGB database
+const fillRankings = async () => {
+  try {
+    const total_births = 337135426; // extracted from the csv file
+    const csvFilePath = `Births.csv`;
+    // get all of the unique names
+    const unqiue_names = await Names.find();
+    // get all of the counts of every birth, with the name
+    const births = [];
+    fs.createReadStream(csvFilePath)
+      .pipe(csv())
+      .on("data", (row) => {
+        const newBirth = {
+          name: row.Name,
+          count: parseInt(row.Count, 10),
+        };
+        births.push(newBirth);
+      })
+      .on("end", async () => {
+        console.log("Extracted all the births...");
+        // store ALL the counts of every birth into a map
+        let name_counts = new Map();
+        births.forEach((birth) => {
+          const name = birth.name;
+          const count = birth.count;
+          if (name_counts.get(name) == null) {
+            name_counts.set(name, count);
+          } else {
+            name_counts.set(name, name_counts.get(name) + count); // Accumulating count for existing names
+          }
+        });
+
+        // Sort name_counts by count in descending order
+        const sortedCounts = [...name_counts.entries()].sort(
+          (a, b) => b[1] - a[1]
+        );
+
+        const rankings = [];
+        // Assign ranks based on sorted counts
+        sortedCounts.forEach(async (entry, index) => {
+          const [name, count] = entry;
+          const percentage = (count / total_births) * 100;
+          const rank = index + 1; // Rank starts from 1
+
+          // Create and save the ranking document
+          const ranking = {
+            name: name,
+            percentage: percentage,
+            rank: rank,
+          };
+          rankings.push(ranking);
+          console.log(`${name} is ranked ${rank} at ${percentage}`);
+        });
+        await Rankings.insertMany(rankings);
+      });
+  } catch (error) {
+    console.log("Error filling the rankings database", error);
   }
 };

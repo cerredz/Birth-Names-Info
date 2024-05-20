@@ -4,13 +4,17 @@ import "../styles/landing.css";
 import { GiPolarStar } from "react-icons/gi";
 import { GoSearch } from "react-icons/go";
 import { motion } from "framer-motion";
+import checkmark from "../images/check.png";
 
 const Landing = () => {
   const [name, setName] = useState("");
   return (
     <div className="">
       <Navbar />
-      <div className="min-h-screen relative flex flex-col items-center justify-center px-[5%] gap-6">
+      <div
+        id="hero"
+        className="min-h-screen relative flex flex-col items-center justify-center px-[5%] gap-6"
+      >
         {/* TITLE CONTAINER */}
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-row items-center justify-start text-green-500 text-sm tracking-wide font-medium">
@@ -50,6 +54,16 @@ const Landing = () => {
               </motion.button>
             </div>
           </span>
+        </div>
+        <div className="flex items-center justify-center gap-2">
+          <h1 className="text-sm tracking-wider font-medium text-neutral-400">
+            <span className="text-green-500">Millions</span> of data parameters
+          </h1>
+          <img
+            src={checkmark}
+            alt="green check icon"
+            className="w-[20px]"
+          ></img>
         </div>
       </div>
     </div>

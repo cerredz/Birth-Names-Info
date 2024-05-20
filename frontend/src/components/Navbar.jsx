@@ -14,7 +14,7 @@ const Navbar = () => {
         <h1 className="font-bold text-xl tracking-wider">NamesVerse</h1>
       </div>
       <div className="flex items-center justify-center gap-4">
-        <div className=" flex items-center justify-center gap-2">
+        <div className=" items-center justify-center gap-2 hidden sm:flex">
           <LuMail className="text-neutral-800 text-md" />
 
           <p className="text-md font-medium text-neutral-800 tracking-wider">

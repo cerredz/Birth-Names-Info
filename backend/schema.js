@@ -47,8 +47,12 @@ export const typeDefs = gql`
   }
 
   type Query {
-    welcome: String
-    getBirths: [Birth!]!
-    getSimiliarNames(name: String): [Name!]!
+    isNameRegistered(name: String!): Boolean!
+    isBoyName(name: String!): Boolean!
+    isGirlName(name: String!): Boolean!
+    isNeutralName(name: String!): Boolean!
+    getSimiliarNames(name: String!, gender: String!): [Name!]!
+    getNameCount(name: String!): Int!
+    getNamePopularity(name: String!): Float!
   }
 `;
