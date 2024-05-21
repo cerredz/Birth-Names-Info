@@ -45,6 +45,16 @@ export const typeDefs = gql`
     id: ID!
     name: String!
   }
+  type Popularity {
+    percentage: Float!
+    year: Int!
+    count: Int!
+  }
+  type CenturyBirthCounts {
+    century19: Int!
+    century20: Int!
+    century21: Int!
+  }
 
   type Query {
     isNameRegistered(name: String!): Boolean!
@@ -55,6 +65,9 @@ export const typeDefs = gql`
     getNameCount(name: String!): Int!
     getNamePopularity(name: String!): Float!
     getNameRanking(name: String!): Int!
-    getPercentile(name: String): Float!
+    getPercentile(name: String!): Float!
+    getPeakPopularity(name: String!, years: Int!): [Popularity!]!
+    getMostPopularDecade(name: String!): Int!
+    getBirthCountByCentury(name: String!): CenturyBirthCounts!
   }
 `;

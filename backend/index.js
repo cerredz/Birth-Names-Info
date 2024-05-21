@@ -6,6 +6,11 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import { initializeDatabase } from "./intializeDatabase.js";
+import {
+  getMostPopularDecadeHelper,
+  getPeakPopularityHelper,
+  getBirthCountByCenturyHelper,
+} from "./helpers.js";
 
 async function initServer() {
   // initialize express and Apollo(GraphQL) server
@@ -25,9 +30,11 @@ async function initServer() {
   // connect to MongoDB Database
   try {
     await mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
-    console.log(process.env.MONGODB_CONNECTION_STRING);
-    await initializeDatabase();
+    //await initializeDatabase();
     console.log("Successfully Connected to MongoDB Database");
+    //await getMostPopularDecadeHelper("Michael");
+
+    await getBirthCountByCenturyHelper("Michael");
   } catch (error) {
     console.log("Error Connecting to the MongoDB Database: ", error);
   }

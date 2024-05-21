@@ -13,6 +13,7 @@ import networkIcon from "../images/network.png";
 const Landing = () => {
   const [name, setName] = useState("");
   const [isCompletedData, setIsCompletedData] = useState(false);
+  const [isLoadingData, setIsLoadingData] = useState(false);
   return (
     <div className="">
       <Navbar />

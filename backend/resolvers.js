@@ -3,6 +3,11 @@ import Names from "./models/Names.js";
 import Births from "./models/Births.js";
 import Years from "./models/Years.js";
 import Rankings from "./models/Ranking.js";
+import {
+  getPeakPopularityHelper,
+  getMostPopularDecadeHelper,
+  getBirthCountByCenturyHelper,
+} from "./helpers.js";
 
 export const resolvers = {
   Query: {
@@ -70,6 +75,18 @@ export const resolvers = {
         ((total_unique_names - ranking_of_inputted_name) / total_unique_names) *
         100; // equation to calculate percentile
       return percentile;
+    },
+    // returns the peak popularity of the inputted name
+    async getPeakPopularity(root, args) {
+      return await getPeakPopularityHelper(args.name, args.years);
+    },
+    // using the getPeakPopularity function, returns the most popular decade
+    async getMostPopularDecade(root, args) {
+      return await getMostPopularDecadeHelper(args.name);
+    },
+    // returns the # of births of a name in the 1800s, 1900s, and 2000s, all seperately
+    async getBirthCountByCentury(root, args) {
+      return await getBirthCountByCenturyHelper(args.name);
     },
   },
 };
