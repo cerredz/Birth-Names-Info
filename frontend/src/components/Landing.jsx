@@ -5,9 +5,14 @@ import { GiPolarStar } from "react-icons/gi";
 import { GoSearch } from "react-icons/go";
 import { motion } from "framer-motion";
 import checkmark from "../images/check.png";
+import personIcon from "../images/person.png";
+import contactIcon from "../images/contacts.png";
+import folderIcon from "../images/folder.png";
+import networkIcon from "../images/network.png";
 
 const Landing = () => {
   const [name, setName] = useState("");
+  const [isCompletedData, setIsCompletedData] = useState(false);
   return (
     <div className="">
       <Navbar />
@@ -21,12 +26,13 @@ const Landing = () => {
             <GiPolarStar />
             <p>In-Depth Data Analysis</p>
           </div>
-          <h1 className="text-4xl sm:text-7xl font-bold text-center tracking-wider max-w-xs sm:max-w-xl">
+          <h1 className="text-4xl sm:text-7xl font-bold text-center tracking-wider max-w-xs sm:max-w-xl relative">
             Finding the{" "}
             <span className="text-green-500 drop-shadow-md underline">
               Perfect
             </span>{" "}
             name
+            <Icons />
           </h1>
           <p className="mt-4 text-center text-neutral-400 font-medium tracking-wide sm:max-w-lg text-sm sm:text-base px-[5%] sm:px-0">
             Begin your exploration of birth name statistics dating back to 1880
@@ -70,4 +76,23 @@ const Landing = () => {
   );
 };
 
+/* BACKGROUND ICONS */
+const Icons = () => {
+  return (
+    <>
+      <div className="hidden absolute left-[-100px] top-[35px] -rotate-12 p-4 bg-white rounded-full md:flex items-center justify-center shadow-lg">
+        <img src={personIcon} alt="person icon" className="w-[35px]"></img>
+      </div>
+      <div className="hidden absolute left-0 top-[-50px] -rotate-12 p-3 bg-white rounded-full md:flex items-center justify-center shadow-lg">
+        <img src={contactIcon} alt="contact icon" className="w-[25px]"></img>
+      </div>
+      <div className="hidden absolute right-0 top-[-50px] rotate-12 p-3 bg-white rounded-full md:flex items-center justify-center shadow-lg">
+        <img src={folderIcon} alt="folder icon" className="w-[30px]"></img>
+      </div>
+      <div className="hidden absolute right-[-100px] top-[40px] rotate-12 p-4 bg-white rounded-full md:flex items-center justify-center shadow-lg">
+        <img src={networkIcon} alt="network icon" className="w-[37px]"></img>
+      </div>
+    </>
+  );
+};
 export default Landing;

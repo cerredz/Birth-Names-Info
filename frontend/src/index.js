@@ -13,7 +13,7 @@ root.render(
 /* 
 TODO:
  - implement a grid background
- - add icons (3-5) above the text in a circular pathway
+ - ** THINK OF MORE DATA ANALYSIS THAT I CAN PROVIDE TO THE USER *
  - add the background glows
  - MAKE SURE ON THE FRONTEND WE CORRECTLY FORMAT THE INPUTTED NAME BEFORE PASSING IT TO THE BACKEND
 */

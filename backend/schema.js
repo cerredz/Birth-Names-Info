@@ -54,5 +54,7 @@ export const typeDefs = gql`
     getSimiliarNames(name: String!, gender: String!): [Name!]!
     getNameCount(name: String!): Int!
     getNamePopularity(name: String!): Float!
+    getNameRanking(name: String!): Int!
+    getPercentile(name: String): Float!
   }
 `;

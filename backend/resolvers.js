@@ -53,8 +53,23 @@ export const resolvers = {
     },
     // returns the popularity of the inputted name
     async getNamePopularity(root, args) {
-      const popularity = await Rankings.find({ name: args.name });
-      return parseFloat(popularity.toFixed(2));
+      const popularity = await Rankings.findOne({ name: args.name });
+      const percentage = popularity.percentage;
+      return parseFloat(percentage);
+    },
+    // returns the popularity ranking of the inputted name
+    async getNameRanking(root, args) {
+      const rankDoc = await Rankings.findOne({ name: args.name });
+      return rankDoc.rank;
+    },
+    // returns the percentile of the popularity of a name
+    async getPercentile(root, args) {
+      const total_unique_names = 93889; // extracted from the database
+      const ranking_of_inputted_name = await this.getNameRanking(root, args);
+      const percentile =
+        ((total_unique_names - ranking_of_inputted_name) / total_unique_names) *
+        100; // equation to calculate percentile
+      return percentile;
     },
   },
 };
