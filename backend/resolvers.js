@@ -45,7 +45,18 @@ export const resolvers = {
         name: { $regex: `^${first_letter}`, $options: "i" }, // finds name with the same first letter
         gender: args.gender,
       });
-      return similarNames;
+
+      // remove the duplicate name entries
+      const uniqueNamesSet = new Set();
+      similarNames.forEach((birth) => {
+        if (birth.name) {
+          // Check if the name field is not null or undefined
+          uniqueNamesSet.add(birth.name);
+        }
+      });
+
+      const uniqueNames = Array.from(uniqueNamesSet);
+      return uniqueNames;
     },
     // returns the amount of people with the same inputted name
     async getNameCount(root, args) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "../styles/landing.css";
 import { GiPolarStar } from "react-icons/gi";
@@ -9,11 +9,65 @@ import personIcon from "../images/person.png";
 import contactIcon from "../images/contacts.png";
 import folderIcon from "../images/folder.png";
 import networkIcon from "../images/network.png";
+import { useLazyQuery } from "@apollo/client";
+import { IS_NAME_REGISTERED, GET_NAME_DATA, IS_NAME_BOY } from "../Queries";
+import { AnimatePresence } from "framer-motion";
+import Error from "./Error";
 
 const Landing = () => {
   const [name, setName] = useState("");
-  const [isCompletedData, setIsCompletedData] = useState(false);
+  const [isNameRegistered, setIsNameRegisted] = useState(true);
+  const [data, setData] = useState(null);
   const [isLoadingData, setIsLoadingData] = useState(false);
+
+  /* DELAYED EVENT BASED APOLLO QUERIES */
+  const [
+    checkName,
+    { loading: checkNameLoading, error: checkNameError, data: checkNameData },
+  ] = useLazyQuery(IS_NAME_REGISTERED, {
+    onCompleted: async (data) => {
+      if (!data.isNameRegistered) {
+        setIsNameRegisted(false);
+      } else {
+        const isBoyName = await isBoy({ variables: { name: name } });
+        console.log(isBoyName.data.isBoyName);
+        const nameDataResult = await fetchNameData({
+          variables: {
+            name: name,
+            years: 5,
+            gender: isBoyName.data.isBoyName ? "M" : "F",
+          },
+        });
+        console.log(nameDataResult);
+        setData(nameDataResult.data);
+      }
+    },
+  });
+
+  const [
+    fetchNameData,
+    { loading: fetchNameLoading, error: fetchNameError, data: nameData },
+  ] = useLazyQuery(GET_NAME_DATA);
+
+  const [isBoy, { loading: isBoyLoading, error: isBoyError, data: isBoyData }] =
+    useLazyQuery(IS_NAME_BOY);
+
+  /* FUNCTIONALITY WHEN THE USER HITS THE SEARCH BUTTON */
+  const onSearch = async () => {
+    setIsLoadingData(true);
+    try {
+      await checkName({ variables: { name: name } });
+      setIsLoadingData(false);
+    } catch (error) {
+      console.error(`Error Searching for the data for ${name}`);
+    }
+  };
+
+  useEffect(() => {
+    console.log("data: ", data);
+    console.log("loading data: ", isLoadingData);
+  }, [data, isLoadingData]);
+
   return (
     <div className="">
       <Navbar />
@@ -54,7 +108,7 @@ const Landing = () => {
 
               <motion.button
                 whileTap={{ scale: 0.9 }}
-                onClick={() => console.log("Hello World")}
+                onClick={(e) => onSearch(name)}
                 className="z-10 flex flex-row items-center justify-center gap-2 bg-green-500 py-2 text-lg px-4 rounded-md font-medium tracking-wide shadow-lg shadow-green-500/30 transition duration-500 hover:transition hover:duration-500 hover:bg-green-600"
               >
                 Search
@@ -73,6 +127,19 @@ const Landing = () => {
           ></img>
         </div>
       </div>
+      {/* ERROR POPUP */}
+      <AnimatePresence>
+        {!isNameRegistered && (
+          <Error
+            handleErrorClick={() => {
+              setName("");
+              setIsNameRegisted(true);
+            }}
+          />
+        )}
+      </AnimatePresence>
+      {/* DATA IS READY TO BE DISPLAYED */}
+      <AnimatePresence></AnimatePresence>
     </div>
   );
 };
@@ -96,4 +163,5 @@ const Icons = () => {
     </>
   );
 };
+
 export default Landing;

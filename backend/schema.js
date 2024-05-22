@@ -61,7 +61,7 @@ export const typeDefs = gql`
     isBoyName(name: String!): Boolean!
     isGirlName(name: String!): Boolean!
     isNeutralName(name: String!): Boolean!
-    getSimiliarNames(name: String!, gender: String!): [Name!]!
+    getSimiliarNames(name: String!, gender: String!): [String!]!
     getNameCount(name: String!): Int!
     getNamePopularity(name: String!): Float!
     getNameRanking(name: String!): Int!
