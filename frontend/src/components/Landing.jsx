@@ -13,6 +13,7 @@ import { useLazyQuery } from "@apollo/client";
 import { IS_NAME_REGISTERED, GET_NAME_DATA, IS_NAME_BOY } from "../Queries";
 import { AnimatePresence } from "framer-motion";
 import Error from "./Error";
+import Data from "./Data";
 
 const Landing = () => {
   const [name, setName] = useState("");
@@ -29,8 +30,16 @@ const Landing = () => {
       if (!data.isNameRegistered) {
         setIsNameRegisted(false);
       } else {
+        // name is registered
+        // check if user has entered name before via local storage
+        const cachedNameData = localStorage.getItem(name);
+        if (cachedNameData) {
+          setData(JSON.parse(cachedNameData));
+          setIsLoadingData(false);
+          return;
+        }
+        // if first time looking up name, call our graphQL resolvers, then update local storage
         const isBoyName = await isBoy({ variables: { name: name } });
-        console.log(isBoyName.data.isBoyName);
         const nameDataResult = await fetchNameData({
           variables: {
             name: name,
@@ -38,8 +47,9 @@ const Landing = () => {
             gender: isBoyName.data.isBoyName ? "M" : "F",
           },
         });
-        console.log(nameDataResult);
         setData(nameDataResult.data);
+        localStorage.setItem(name, JSON.stringify(nameDataResult.data));
+        setIsLoadingData(false);
       }
     },
   });
@@ -57,7 +67,6 @@ const Landing = () => {
     setIsLoadingData(true);
     try {
       await checkName({ variables: { name: name } });
-      setIsLoadingData(false);
     } catch (error) {
       console.error(`Error Searching for the data for ${name}`);
     }
@@ -126,6 +135,10 @@ const Landing = () => {
             className="w-[20px]"
           ></img>
         </div>
+        {/* CUSTOM LOADER WHEN DATA IS LOADING */}
+        <AnimatePresence>
+          {isLoadingData && <span className="loader"></span>}
+        </AnimatePresence>
       </div>
       {/* ERROR POPUP */}
       <AnimatePresence>
@@ -138,8 +151,11 @@ const Landing = () => {
           />
         )}
       </AnimatePresence>
+
       {/* DATA IS READY TO BE DISPLAYED */}
-      <AnimatePresence></AnimatePresence>
+      <AnimatePresence>
+        {!isLoadingData && data !== null && <Data data={data} />}
+      </AnimatePresence>
     </div>
   );
 };
