@@ -5,6 +5,7 @@ import boyIcon from "../images/boy.png";
 import girlIcon from "../images/girl.png";
 import neutralIcon from "../images/neutral.png";
 import { MdOutlineWorkspacePremium } from "react-icons/md";
+import { FaBook } from "react-icons/fa";
 
 const Data = (props) => {
   const gender = props.data.gender;
@@ -149,7 +150,7 @@ const Data = (props) => {
             </div>
           </motion.div>
           {/* MIDDLE COLUMN CONTENT */}
-          <motion.div className="flex w-full lg:basis-5/12 flex-col items-between justify-center gap-4 h-[90vh] bg-red-500">
+          <motion.div className="flex w-full lg:basis-5/12 flex-col items-between justify-center gap-4 h-[90vh] ">
             {/* POPULARITY CONTAINER */}
             <div className="flex basis-5/12 bg-slate-500">
               <h1>Popularity</h1>
@@ -165,8 +166,47 @@ const Data = (props) => {
               </div>
             </div>
             {/* CENTURY CONTAINER */}
-            <div className="flex basis-3/12 bg-purple-600">
-              <h1>Century</h1>
+            <div className="basis-3/12 py-3 px-6 rounded-xl flex flex-row items-center justify-between bg-white light-shadow gap-6">
+              <div className="flex flex-col items-center justify-center basis-1/4">
+                <div className="flex flex-row items-center justify-center gap-1 text-green-400 font-bold text-xs tracking-wider">
+                  <FaBook />
+                  <p>History</p>
+                </div>
+                <h1 className="text-3xl font-bold text-neutral-800 drop-shadow-md tracking-wider">
+                  Century
+                </h1>
+                <p className="text-center text-neutral-400 font-medium tracking-wider text-xs w-[190px]">
+                  See how many people share your name each century.
+                </p>
+              </div>
+              <div className="flex flex-row items-center justify-between basis-3/4">
+                <div className="relative flex flex-col items-center justify-center">
+                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title">
+                    {props.data.getBirthCountByCentury.century19}
+                  </h1>
+                  <p className="mt-1 font-medium text-neutral-300 italic tracking-wider">
+                    1800s
+                  </p>
+                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-10px] h-1/2 w-[3px] rounded-xl "></span>
+                </div>
+                <div className="relative flex flex-col items-center justify-center">
+                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title">
+                    {props.data.getBirthCountByCentury.century20}
+                  </h1>
+                  <p className="mt-1 font-medium text-neutral-300 italic tracking-wider">
+                    1900s
+                  </p>
+                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-10px] h-1/2 w-[3px] rounded-xl "></span>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title">
+                    {props.data.getBirthCountByCentury.century21}
+                  </h1>
+                  <p className="mt-1 font-medium text-neutral-300 tracking-wider italic">
+                    2000s
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
           {/* RIGHT COLUMN CONTENT */}
