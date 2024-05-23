@@ -138,3 +138,23 @@ const getCentury = (year) => {
   const century = Math.floor(year / 100) * 100;
   return century;
 };
+
+// returns the total gender count for a specific name
+export async function getGenderCounts(name) {
+  try {
+    const [male_births, female_births] = await Promise.all([
+      Births.find({ name: name, gender: "M" }),
+      Births.find({ name: name, gender: "F" }),
+    ]);
+
+    const male_count = male_births.reduce((sum, birth) => sum + birth.count, 0);
+    const female_count = female_births.reduce(
+      (sum, birth) => sum + birth.count,
+      0
+    );
+
+    return { male_count, female_count };
+  } catch (error) {
+    console.log(`Error getting the total name count for ${name}: `, error);
+  }
+}

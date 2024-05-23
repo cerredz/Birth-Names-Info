@@ -10,7 +10,13 @@ import contactIcon from "../images/contacts.png";
 import folderIcon from "../images/folder.png";
 import networkIcon from "../images/network.png";
 import { useLazyQuery } from "@apollo/client";
-import { IS_NAME_REGISTERED, GET_NAME_DATA, IS_NAME_BOY } from "../Queries";
+import {
+  IS_NAME_REGISTERED,
+  GET_NAME_DATA,
+  IS_NAME_BOY,
+  IS_NAME_GIRL,
+  IS_NAME_NEUTRAL,
+} from "../Queries";
 import { AnimatePresence } from "framer-motion";
 import Error from "./Error";
 import Data from "./Data";
@@ -39,7 +45,20 @@ const Landing = () => {
           return;
         }
         // if first time looking up name, call our graphQL resolvers, then update local storage
-        const isBoyName = await isBoy({ variables: { name: name } });
+        const [isBoyName, isGirlName, isNeutralName] = await Promise.all([
+          isBoy({ variables: { name } }),
+          isGirl({ variables: { name } }),
+          isNeutral({ variables: { name } }),
+        ]);
+
+        let gender = null;
+        if (isNeutralName.data.isNeutralName) {
+          gender = "N";
+        } else if (isBoyName.data.isBoyName) {
+          gender = "M";
+        } else {
+          gender = "F";
+        }
         const nameDataResult = await fetchNameData({
           variables: {
             name: name,
@@ -47,8 +66,15 @@ const Landing = () => {
             gender: isBoyName.data.isBoyName ? "M" : "F",
           },
         });
-        setData(nameDataResult.data);
-        localStorage.setItem(name, JSON.stringify(nameDataResult.data));
+        console.log("is a boy: ", isBoyName.data.isBoyName);
+        // Append gender to the nameDataResult.data
+        const nameDataWithGender = {
+          ...nameDataResult.data,
+          gender,
+        };
+        console.log(nameDataWithGender);
+        setData(nameDataWithGender);
+        localStorage.setItem(name, JSON.stringify(nameDataWithGender));
         setIsLoadingData(false);
       }
     },
@@ -61,6 +87,15 @@ const Landing = () => {
 
   const [isBoy, { loading: isBoyLoading, error: isBoyError, data: isBoyData }] =
     useLazyQuery(IS_NAME_BOY);
+
+  const [
+    isGirl,
+    { loading: isGirlLoading, error: isGirlError, data: isGirlData },
+  ] = useLazyQuery(IS_NAME_GIRL);
+  const [
+    isNeutral,
+    { loading: isNeutralLoading, error: isNeutralError, data: isNeutralData },
+  ] = useLazyQuery(IS_NAME_GIRL);
 
   /* FUNCTIONALITY WHEN THE USER HITS THE SEARCH BUTTON */
   const onSearch = async () => {
@@ -76,7 +111,11 @@ const Landing = () => {
     console.log("data: ", data);
     console.log("loading data: ", isLoadingData);
   }, [data, isLoadingData]);
-
+  /*
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+  */
   return (
     <div className="">
       <Navbar />
@@ -154,7 +193,7 @@ const Landing = () => {
 
       {/* DATA IS READY TO BE DISPLAYED */}
       <AnimatePresence>
-        {!isLoadingData && data !== null && <Data data={data} />}
+        {!isLoadingData && data !== null && <Data data={data} name={name} />}
       </AnimatePresence>
     </div>
   );

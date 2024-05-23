@@ -7,6 +7,7 @@ import {
   getPeakPopularityHelper,
   getMostPopularDecadeHelper,
   getBirthCountByCenturyHelper,
+  getGenderCounts,
 } from "./helpers.js";
 
 export const resolvers = {
@@ -21,21 +22,22 @@ export const resolvers = {
     },
     // returns whether or not the name inputted is a boy name
     async isBoyName(root, args) {
-      return (
-        (await Births.countDocuments({ name: args.name, gender: "M" })) >= 20
-      ); // need more than 20 instances of a name for it to be considered a gender
+      const { male_count, female_count } = await getGenderCounts(args.name);
+      const total_count = male_count + female_count;
+      return male_count / total_count > 0.9;
     },
     // returns whether or not the name inputted is a girl name
     async isGirlName(root, args) {
-      return (
-        (await Births.countDocuments({ name: args.name, gender: "F" })) >= 20
-      ); // need more than 20 instances of a name for it to be considered a gender
+      const { male_count, female_count } = await getGenderCounts(args.name);
+      const total_count = male_count + female_count;
+      return female_count / total_count > 0.9;
     },
     //returns whether or not a name could be both a boy and a girl name
     async isNeutralName(root, args) {
+      const { male_count, female_count } = await getGenderCounts(args.name);
+      const total_count = male_count + female_count;
       return (
-        (await Births.countDocuments({ name: args.name, gender: "F" })) >= 20 &&
-        (await Births.countDocuments({ name: args.name, gender: "M" })) >= 20
+        male_count / total_count <= 0.9 && female_count / total_count <= 0.9
       );
     },
     // returns names starting with the same letter

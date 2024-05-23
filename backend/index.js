@@ -10,6 +10,7 @@ import {
   getMostPopularDecadeHelper,
   getPeakPopularityHelper,
   getBirthCountByCenturyHelper,
+  getGenderCounts,
 } from "./helpers.js";
 
 async function initServer() {
@@ -34,7 +35,7 @@ async function initServer() {
     console.log("Successfully Connected to MongoDB Database");
     //await getMostPopularDecadeHelper("Michael");
 
-    await getBirthCountByCenturyHelper("Michael");
+    //await getBirthCountByCenturyHelper("Michael");
   } catch (error) {
     console.log("Error Connecting to the MongoDB Database: ", error);
   }
