@@ -4,6 +4,8 @@ import "../styles/data.css";
 import boyIcon from "../images/boy.png";
 import girlIcon from "../images/girl.png";
 import neutralIcon from "../images/neutral.png";
+import { MdOutlineWorkspacePremium } from "react-icons/md";
+
 const Data = (props) => {
   const gender = props.data.gender;
   const genderIconSource =
@@ -28,7 +30,7 @@ const Data = (props) => {
           width: { duration: 0.9, ease: "easeInOut", delay: 0.2 },
           height: { duration: 1.1, ease: "easeInOut", delay: 1.2 },
         }}
-        className="origin-center rounded-xl bg-[rgba(0,0,0,.025)] backdrop-blur-lg relative flex items-center justify-center"
+        className="origin-center rounded-xl bg-[rgba(0,0,0,.05)] backdrop-blur-lg relative flex items-center justify-center"
       >
         {/* DATA CONTENT CONTAINER */}
         <motion.div
@@ -63,7 +65,9 @@ const Data = (props) => {
               {/* GENDER CONTAINER */}
               <div className="flex flex-row items-center justify-between basis-1/2 px-6 bg-white rounded-xl light-shadow">
                 <div className="flex flex-col items-center justify-center h-full basis-1/2">
-                  <h1 className=" text-3xl tracking-wider font-neutral-800 font-bold drop-shadow-md">
+                  <h1
+                    className={`text-3xl tracking-wider font-neutral-800 font-bold drop-shadow-md `}
+                  >
                     Gender
                   </h1>
                   <p className="text-center font-medium text-neutral-400 tracking-wide drop-shadow-sm text-sm">
@@ -87,8 +91,61 @@ const Data = (props) => {
               </div>
             </div>
             {/* PEAK POPULARITY CONTAINER */}
-            <div className="flex basis-1/2 bg-orange-500">
-              <h1>Peak Popularity</h1>
+            <div className="flex basis-1/2 light-shadow bg-white rounded-xl flex-col items-center justify-between pt-1 pb-6 px-6">
+              {/* TITLE */}
+              <div className="py-3 flex flex-col items-center justify-center w-full ">
+                <div className=" flex flex-row items-center justify-center text-xs text-green-400 gap-1">
+                  <MdOutlineWorkspacePremium className="font-bold" />
+                  <p className="font-bold tracking-wide ">Most Popular Years</p>
+                </div>
+                <h1 className="text-2xl font-bold text-center tracking-wider drop-shadow-md">
+                  Peak Popularity
+                </h1>
+                <hr className="w-full h-[2px] mt-2 bg-[rgba(0,0,0,.05)]"></hr>
+              </div>
+              {/* RANKINGS */}
+              <div className="flex flex-col items-center justify-center gap-3">
+                {props.data.getPeakPopularity.map((popularity, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center justify-center  "
+                  >
+                    <div className="flex flex-row items-center justify-center gap-10">
+                      <div className="flex flex-row items-center justify-center gap-1">
+                        <p
+                          className={`font-bold text-xl tracking-wide ${
+                            index === 0 && "text-yellow-400"
+                          } ${index === 1 && "text-gray-400"} ${
+                            index === 2 && "text-amber-800"
+                          }`}
+                        >
+                          {" "}
+                          {index + 1})
+                        </p>
+                        <p className="font-semibold tracking-wider flex items-center justify-center">
+                          {popularity.year}
+                        </p>
+                      </div>
+                      <p className="relative tracking-wide italic text-neutral-400 font-medium flex items-center justify-center">
+                        <span className="absolute w-[15px] h-[3px] rounded-xl left-[-25px] bg-[rgba(0,0,0,.1)]"></span>
+                        {popularity.percentage.toFixed(2)}%
+                      </p>
+                    </div>
+                    {index !== 4 && (
+                      <hr className="w-full h-[2px] mt-2 bg-[rgba(0,0,0,.05)]"></hr>
+                    )}
+                  </div>
+                ))}
+              </div>
+              {/* PEAK POPULARITY FUN FACT */}
+              <div className="flex flex-col items-center justify-center gap-2 w-full">
+                <hr className="w-full h-[2px] mt-2 bg-[rgba(0,0,0,.05)]"></hr>
+                <p className="text-center text-xs italic tracking-wider font-medium text-neutral-400">
+                  In the year {props.data.getPeakPopularity[0].year} there were{" "}
+                  {props.data.getPeakPopularity[0].count} people born with the
+                  name {props.name}
+                </p>
+              </div>
             </div>
           </motion.div>
           {/* MIDDLE COLUMN CONTENT */}
