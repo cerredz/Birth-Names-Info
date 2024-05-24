@@ -182,15 +182,16 @@ const Data = (props) => {
                 </p>
               </div>
               <div className="basis-1/2 flex flex-col items-center justify-center">
-                <div className="relative flex items-center justify-center rounded-full p-3 bg-gradient-to-r z-50 from-green-400 via-green-500 to-green-400 w-36 h-36 popularity-container">
-                  <h1 className="text-center   text-4xl absolute font-bold text-neutral-800 drop-shadow-md tracking-wider z-10">
+                <div className="absolute flex items-center justify-center rounded-full p-3 bg-gradient-to-r z-10 from-green-400 via-green-500 to-green-400 w-36 h-36 popularity-container">
+                  <h1 className="text-center text-4xl absolute font-bold text-neutral-800 drop-shadow-md tracking-wider z-10">
                     {popularity}
                     <span className="text-lg font-medium text-neutral-600 ">
                       %
                     </span>
                   </h1>
+                  <span className="outer-glow"></span>
                 </div>
-                <p className="absolute translate-y-24 text-neutral-300 italic font-bold tracking-wider text-lg">
+                <p className="absolute translate-y-28 text-neutral-300 italic font-bold tracking-wider text-lg">
                   rank: {props.data.getNameRanking}
                 </p>
               </div>
