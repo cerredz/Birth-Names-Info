@@ -33,3 +33,12 @@
 .gender-neutral::before {
   background: grey;
 }
+
+.earth-icon::before {
+  position: absolute;
+  content: "";
+  inset: 25px 40px;
+  border-radius: inherit;
+  background: linear-gradient(to right, #34d399, rgb(49, 190, 246));
+  filter: blur(2rem);
+}

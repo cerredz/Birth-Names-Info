@@ -6,6 +6,8 @@ import girlIcon from "../images/girl.png";
 import neutralIcon from "../images/neutral.png";
 import { MdOutlineWorkspacePremium } from "react-icons/md";
 import { FaBook } from "react-icons/fa";
+import earth from "../images/earth.png";
+import { PiRanking } from "react-icons/pi";
 
 const Data = (props) => {
   const gender = props.data.gender;
@@ -155,18 +157,58 @@ const Data = (props) => {
             <div className="flex basis-5/12 bg-slate-500">
               <h1>Popularity</h1>
             </div>
-            <div className="flex basis-4/12 bg-purple-300 flex-row items-center jsutify-between gap-4">
+            <div className="flex basis-5/12 flex-row items-center jsutify-between gap-4">
               {/* PERCENTILE CONTAINER */}
-              <div className="flex basis-1/2 h-full bg-yellow-500">
-                <h1>Percentile</h1>
+              <div className="flex basis-1/2 h-full bg-white light-shadow rounded-xl py-6 px-8 flex-col items-center justify-between">
+                <div className="flex w-full items-start justify-start flex-col">
+                  <div className="flex flex-row items-center justify-center gap-1 text-xs text-green-500 font-medium tracking-wide">
+                    <PiRanking />
+                    <p>Ranking</p>
+                  </div>
+                  <h1 className="text-3xl tracking-wider drop-shadow-md text-neutral-800 font-bold">
+                    Percentile
+                  </h1>
+                </div>
+                <div className="flex flex-col items-center justify-center w-full">
+                  <div className="w-full flex flex-row items-start justify-between mx-auto bg-[rgba(0,0,0,.05)] rounded-xl px-3 py-2">
+                    <p className="text-xs text-neutral-800 tracking-wider font-bold">
+                      0%
+                    </p>
+                    <div className="flex flex-col items-center justify-center mt-2">
+                      <h1 className="text-xl font-bold tracking-wider text-green-400 drop-shadow-md">
+                        {props.data.getPercentile.toFixed(2)}%
+                      </h1>
+                      <p className="text-xs text-neutral-500 italic tracking-wider font-bold">
+                        Based on Popularity{" "}
+                      </p>
+                    </div>
+                    <p className="text-xs text-neutral-800 tracking-wider font-bold">
+                      100%
+                    </p>
+                  </div>
+                </div>
               </div>
               {/* REGION CONTAINER */}
-              <div className="flex basis-1/2 h-full bg-green-400">
-                <h1>Region</h1>
+              <div className="overflow-hidden flex basis-1/2 h-full bg-white light-shadow rounded-xl flex-col items-center justify-between relative">
+                <div className="flex flex-col items-center justify-center gap-1 mt-8 z-10">
+                  <h1 className="text-3xl font-bold tracking-wider text-neutral-800 drop-shadow-md">
+                    Region
+                  </h1>
+                  <p className="w-3/4 mx-auto text-xs text-neutral-400 text-center font-medium tracking-wider">
+                    Data comes from a United States birth dataset
+                  </p>
+                </div>
+                <div className="absolute translate-y-32 earth-icon rounded-full">
+                  <img
+                    src={earth}
+                    alt="Earth icon"
+                    className=" rotate-180 scale-110"
+                  ></img>
+                </div>
               </div>
             </div>
             {/* CENTURY CONTAINER */}
-            <div className="basis-3/12 py-3 px-6 rounded-xl flex flex-row items-center justify-between bg-white light-shadow gap-6">
+            <div className="basis-2/12 py-3 px-6 rounded-xl flex flex-row items-center justify-between bg-white light-shadow gap-6">
               <div className="flex flex-col items-center justify-center basis-1/4">
                 <div className="flex flex-row items-center justify-center gap-1 text-green-400 font-bold text-xs tracking-wider">
                   <FaBook />
@@ -187,7 +229,7 @@ const Data = (props) => {
                   <p className="mt-1 font-medium text-neutral-300 italic tracking-wider">
                     1800s
                   </p>
-                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-10px] h-1/2 w-[3px] rounded-xl "></span>
+                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-15px] h-1/2 w-[3px] rounded-xl "></span>
                 </div>
                 <div className="relative flex flex-col items-center justify-center">
                   <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title">
@@ -196,7 +238,7 @@ const Data = (props) => {
                   <p className="mt-1 font-medium text-neutral-300 italic tracking-wider">
                     1900s
                   </p>
-                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-10px] h-1/2 w-[3px] rounded-xl "></span>
+                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-15px] h-1/2 w-[3px] rounded-xl "></span>
                 </div>
                 <div className="flex flex-col items-center justify-center">
                   <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title">
