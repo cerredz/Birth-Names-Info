@@ -10,6 +10,8 @@ import earth from "../images/earth.png";
 import { PiRanking } from "react-icons/pi";
 import SemiCircleProgressBar from "react-progressbar-semicircle";
 import { GiJusticeStar } from "react-icons/gi";
+import { customPercentileRound, customPopularityRound } from "../utils/Data";
+import { GiRank3 } from "react-icons/gi";
 
 const Data = (props) => {
   const gender = props.data.gender;
@@ -23,17 +25,10 @@ const Data = (props) => {
       : `The Name ${props.data.name} is a Girl name`;
 
   const [percentile, setPercentile] = useState(props.data.getPercentile);
-  function customRound(percentile) {
-    if (percentile >= 99.995) {
-      return 99.99;
-    } else if (percentile < 0.01) {
-      return 0.01;
-    } else {
-      return Math.round(percentile * 100) / 100;
-    }
-  }
+  const [popularity, setPopularity] = useState(props.data.getNamePopularity);
   useEffect(() => {
-    setPercentile(customRound(percentile));
+    setPercentile(customPercentileRound(percentile));
+    setPopularity(customPopularityRound(popularity));
   }, []);
 
   return (
@@ -74,6 +69,9 @@ const Data = (props) => {
                 <div className="bg-white basis-1/2 py-4 px-8 rounded-xl flex items-center justify-center gap-2 flex-col h-full light-shadow">
                   <h1 className="text-center text-4xl font-bold text-green-400 tracking-wider drop-shadow-md absolute -translate-y-4 green-title">
                     {props.data.getMostPopularDecade}
+                    <span className=" text-neutral-300 font-bold text-lg">
+                      s
+                    </span>
                   </h1>
                   <p className="text-neutral-300 text-xs font-medium tracking-wider absolute translate-y-4 z-10">
                     most popular decade
@@ -170,8 +168,32 @@ const Data = (props) => {
           {/* MIDDLE COLUMN CONTENT */}
           <motion.div className="flex w-full lg:basis-5/12 flex-col items-between justify-center gap-4 h-[90vh] ">
             {/* POPULARITY CONTAINER */}
-            <div className="flex basis-5/12 bg-slate-500">
-              <h1>Popularity</h1>
+            <div className="flex basis-5/12 bg-white light-shadow p-8 rounded-xl flex-row items-center justify-center gap-12">
+              <div className="flex flex-col items-center justify-center h-full gap-1 basis-1/2">
+                <div className="flex flex-row items-center justify-center gap-1 text-green-500 text-xs font-medium tracking-wide">
+                  <GiRank3 />
+                  <p>Percentage</p>
+                </div>
+                <h1 className="text-3xl font-bold drop-shadow-md tracking-wider text-neutral-800">
+                  Popularity
+                </h1>
+                <p className="text-center text-neutral-400 text-sm tracking-wider font-medium">
+                  Percentage of people with the name {props.name}
+                </p>
+              </div>
+              <div className="basis-1/2 flex flex-col items-center justify-center">
+                <div className="relative flex items-center justify-center rounded-full p-3 bg-gradient-to-r z-50 from-green-400 via-green-500 to-green-400 w-36 h-36 popularity-container">
+                  <h1 className="text-center   text-4xl absolute font-bold text-neutral-800 drop-shadow-md tracking-wider z-10">
+                    {popularity}
+                    <span className="text-lg font-medium text-neutral-600 ">
+                      %
+                    </span>
+                  </h1>
+                </div>
+                <p className="absolute translate-y-24 text-neutral-300 italic font-bold tracking-wider text-lg">
+                  rank: {props.data.getNameRanking}
+                </p>
+              </div>
             </div>
             <div className="flex basis-5/12 flex-row items-center jsutify-between gap-4">
               {/* PERCENTILE CONTAINER */}

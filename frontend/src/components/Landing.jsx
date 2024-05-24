@@ -44,11 +44,15 @@ const Landing = () => {
           setIsLoadingData(false);
           return;
         }
+        const correctlyFormattedName =
+          name.trim().charAt(0).toUpperCase() +
+          name.trim().slice(1).toLowerCase();
+
         // if first time looking up name, call our graphQL resolvers, then update local storage
         const [isBoyName, isGirlName, isNeutralName] = await Promise.all([
-          isBoy({ variables: { name } }),
-          isGirl({ variables: { name } }),
-          isNeutral({ variables: { name } }),
+          isBoy({ variables: { name: correctlyFormattedName } }),
+          isGirl({ variables: { name: correctlyFormattedName } }),
+          isNeutral({ variables: { name: correctlyFormattedName } }),
         ]);
 
         let gender = null;
@@ -61,7 +65,7 @@ const Landing = () => {
         }
         const nameDataResult = await fetchNameData({
           variables: {
-            name: name,
+            name: correctlyFormattedName,
             years: 5,
             gender: isBoyName.data.isBoyName ? "M" : "F",
           },
