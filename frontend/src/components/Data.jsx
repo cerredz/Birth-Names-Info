@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "../styles/data.css";
 import boyIcon from "../images/boy.png";
@@ -8,6 +8,8 @@ import { MdOutlineWorkspacePremium } from "react-icons/md";
 import { FaBook } from "react-icons/fa";
 import earth from "../images/earth.png";
 import { PiRanking } from "react-icons/pi";
+import SemiCircleProgressBar from "react-progressbar-semicircle";
+import { GiJusticeStar } from "react-icons/gi";
 
 const Data = (props) => {
   const gender = props.data.gender;
@@ -19,6 +21,20 @@ const Data = (props) => {
       : gender === "N"
       ? `The name ${props.name} is both a girl and a boy name`
       : `The Name ${props.data.name} is a Girl name`;
+
+  const [percentile, setPercentile] = useState(props.data.getPercentile);
+  function customRound(percentile) {
+    if (percentile >= 99.995) {
+      return 99.99;
+    } else if (percentile < 0.01) {
+      return 0.01;
+    } else {
+      return Math.round(percentile * 100) / 100;
+    }
+  }
+  useEffect(() => {
+    setPercentile(customRound(percentile));
+  }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center ">
@@ -168,21 +184,32 @@ const Data = (props) => {
                   <h1 className="text-3xl tracking-wider drop-shadow-md text-neutral-800 font-bold">
                     Percentile
                   </h1>
+                  <p className="text-xs font-medium text-neutral-400 tracking-wide">
+                    Name popularity ranking percentage
+                  </p>
                 </div>
                 <div className="flex flex-col items-center justify-center w-full">
-                  <div className="w-full flex flex-row items-start justify-between mx-auto bg-[rgba(0,0,0,.05)] rounded-xl px-3 py-2">
-                    <p className="text-xs text-neutral-800 tracking-wider font-bold">
+                  <div className="relative flex items-center justify-center">
+                    <SemiCircleProgressBar
+                      percentage={percentile}
+                      stroke={`#4ade80`}
+                      strokeWidth={12}
+                    />
+                    <GiJusticeStar className="absolute text-3xl translate-y-4 text-green-400 percentile-icon" />
+                  </div>
+                  <div className="z-10 w-full flex flex-row items-start justify-between mx-auto bg-[#F2F2F2] rounded-xl px-3 py-2">
+                    <p className="basis-1/6 text-xs text-neutral-800 tracking-wider font-bold">
                       0%
                     </p>
-                    <div className="flex flex-col items-center justify-center mt-2">
-                      <h1 className="text-xl font-bold tracking-wider text-green-400 drop-shadow-md">
-                        {props.data.getPercentile.toFixed(2)}%
+                    <div className="basis-4/6 flex flex-col items-center justify-center mt-2 w-full">
+                      <h1 className="text-center text-xl font-bold tracking-wider text-green-400 drop-shadow-md">
+                        {percentile}%
                       </h1>
                       <p className="text-xs text-neutral-500 italic tracking-wider font-bold">
                         Based on Popularity{" "}
                       </p>
                     </div>
-                    <p className="text-xs text-neutral-800 tracking-wider font-bold">
+                    <p className="basis-1/6 text-xs text-neutral-800 tracking-wider font-bold">
                       100%
                     </p>
                   </div>
