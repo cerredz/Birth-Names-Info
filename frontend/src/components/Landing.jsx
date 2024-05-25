@@ -126,31 +126,51 @@ const Landing = () => {
       <Navbar />
       <div
         id="hero"
-        className="min-h-screen relative flex flex-col items-center justify-center px-[5%] gap-6"
+        className="min-h-screen relative flex flex-col items-center justify-center px-[5%] gap-6 "
       >
         {/* TITLE CONTAINER */}
         <div className="flex flex-col items-center justify-center">
-          <div className="flex flex-row items-center justify-start text-green-500 text-sm tracking-wide font-medium">
+          <motion.div
+            initial={{ y: -25, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="flex flex-row items-center justify-start text-green-500 text-sm tracking-wide font-medium"
+          >
             <GiPolarStar />
             <p>In-Depth Data Analysis</p>
-          </div>
-          <h1 className="text-4xl sm:text-7xl font-bold text-center tracking-wider max-w-xs sm:max-w-xl relative">
+          </motion.div>
+          <motion.h1
+            initial={{ y: -15, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.55 }}
+            className="text-4xl sm:text-7xl font-bold text-center tracking-wider max-w-xs sm:max-w-xl relative"
+          >
             Finding the{" "}
             <span className="text-green-500 drop-shadow-md underline">
               Perfect
             </span>{" "}
             name
             <Icons />
-          </h1>
-          <p className="mt-4 text-center text-neutral-400 font-medium tracking-wide sm:max-w-lg text-sm sm:text-base px-[5%] sm:px-0">
+          </motion.h1>
+          <motion.p
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.75 }}
+            className="mt-4 text-center text-neutral-400 font-medium tracking-wide sm:max-w-lg text-sm sm:text-base px-[5%] sm:px-0"
+          >
             Begin your exploration of birth name statistics dating back to 1880
             - all to assist you in selecting the perfect baby name
-          </p>
+          </motion.p>
         </div>
         {/* INPUT CONTAINER */}
         <div className="flex flex-col items-center justify-center mt-6">
           {/* ENTER NAME CONTAINER */}
-          <span className="enter-name-container rounded-2xl relative">
+          <motion.span
+            initial={{ y: 25, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.55 }}
+            className="enter-name-container rounded-2xl relative"
+          >
             <div className="flex flex-row md:w-[500px] items-center justify-between bg-white py-2 px-6 rounded-2xl relative ">
               <input
                 placeholder="Enter a Name"
@@ -167,12 +187,17 @@ const Landing = () => {
                 Search
               </motion.button>
             </div>
-          </span>
+          </motion.span>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <h1 className="text-sm tracking-wider font-medium text-neutral-400">
+          <motion.h1
+            initial={{ y: 15, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            className="text-sm tracking-wider font-medium text-neutral-400"
+          >
             <span className="text-green-500">Millions</span> of data parameters
-          </h1>
+          </motion.h1>
           <img
             src={checkmark}
             alt="green check icon"
@@ -221,18 +246,62 @@ const Landing = () => {
 const Icons = () => {
   return (
     <>
-      <div className="hidden absolute left-[-100px] top-[35px] -rotate-12 p-4 bg-white rounded-full md:flex items-center justify-center shadow-lg">
+      <motion.div
+        initial={{
+          transform: `translateY(25px) rotate(-18deg) scale(0)`,
+          opacity: 0,
+        }}
+        animate={{
+          transform: `translateY(0) rotate(-18deg) scale(1)`,
+          opacity: 1,
+          transition: { duration: 0.4, delay: 0.1 },
+        }}
+        className="origin-center hidden absolute left-[-100px] top-[35px] -rotate-12 p-4 bg-white rounded-full md:flex items-center justify-center shadow-lg"
+      >
         <img src={personIcon} alt="person icon" className="w-[35px]"></img>
-      </div>
-      <div className="hidden absolute left-0 top-[-50px] -rotate-12 p-3 bg-white rounded-full md:flex items-center justify-center shadow-lg">
+      </motion.div>
+      <motion.div
+        initial={{
+          transform: `translateY(50px) rotate(-18deg) scale(0)`,
+          opacity: 0,
+        }}
+        animate={{
+          transform: `translateY(0) rotate(-18deg) scale(1)`,
+          opacity: 1,
+          transition: { duration: 0.4, delay: 0.5 },
+        }}
+        className="hidden absolute left-0 top-[-50px] -rotate-12 p-3 bg-white rounded-full md:flex items-center justify-center shadow-lg"
+      >
         <img src={contactIcon} alt="contact icon" className="w-[25px]"></img>
-      </div>
-      <div className="hidden absolute right-0 top-[-50px] rotate-12 p-3 bg-white rounded-full md:flex items-center justify-center shadow-lg">
+      </motion.div>
+      <motion.div
+        initial={{
+          transform: `translateY(50px) rotate(18deg) scale(0)`,
+          opacity: 0,
+        }}
+        animate={{
+          transform: `translateY(0) rotate(18deg) scale(1)`,
+          opacity: 1,
+          transition: { duration: 0.4, delay: 0.7 },
+        }}
+        className="hidden absolute right-0 top-[-50px] rotate-12 p-3 bg-white rounded-full md:flex items-center justify-center shadow-lg"
+      >
         <img src={folderIcon} alt="folder icon" className="w-[30px]"></img>
-      </div>
-      <div className="hidden absolute right-[-100px] top-[40px] rotate-12 p-4 bg-white rounded-full md:flex items-center justify-center shadow-lg">
+      </motion.div>
+      <motion.div
+        initial={{
+          transform: `translateY(25px) rotate(18deg) scale(0)`,
+          opacity: 0,
+        }}
+        animate={{
+          transform: `translateY(0) rotate(18deg) scale(1)`,
+          opacity: 1,
+          transition: { duration: 0.4, delay: 0.3 },
+        }}
+        className="origin-center hidden absolute right-[-100px] top-[40px] rotate-12 p-4 bg-white rounded-full md:flex items-center justify-center shadow-lg"
+      >
         <img src={networkIcon} alt="network icon" className="w-[37px]"></img>
-      </div>
+      </motion.div>
     </>
   );
 };

@@ -286,7 +286,7 @@ const Data = (props) => {
                   See how many people share your name each century.
                 </p>
               </div>
-              <div className="flex flex-row items-center justify-between basis-3/4 flex-wrap">
+              <div className="flex flex-row items-center justify-between basis-3/4">
                 <div className="relative flex flex-col items-center justify-center">
                   <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title lg:text-lg xl:text-2xl  ">
                     {props.data.getBirthCountByCentury.century19}
