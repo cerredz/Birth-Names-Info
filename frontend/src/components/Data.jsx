@@ -12,6 +12,9 @@ import SemiCircleProgressBar from "react-progressbar-semicircle";
 import { GiJusticeStar } from "react-icons/gi";
 import { customPercentileRound, customPopularityRound } from "../utils/Data";
 import { GiRank3 } from "react-icons/gi";
+import { VscFileSubmodule } from "react-icons/vsc";
+import bookIcon from "../images/browse.png";
+import { IoCloseOutline } from "react-icons/io5";
 
 const Data = (props) => {
   const gender = props.data.gender;
@@ -32,7 +35,7 @@ const Data = (props) => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center ">
+    <div className="absolute top-0 left-0 w-full lg:h-full z-50 flex items-center justify-center  ">
       {/* TRANSITION CONTAINER */}
       <motion.div
         initial={{ width: 0, height: `5px` }}
@@ -44,21 +47,28 @@ const Data = (props) => {
           width: { duration: 0.9, ease: "easeInOut", delay: 0.2 },
           height: { duration: 1.1, ease: "easeInOut", delay: 1.2 },
         }}
-        className="origin-center rounded-xl bg-[rgba(0,0,0,.05)] backdrop-blur-lg relative flex items-center justify-center"
+        className="origin-center rounded-xl bg-[rgba(0,0,0,.05)] backdrop-blur-lg relative flex items-center justify-center   "
       >
         {/* DATA CONTENT CONTAINER */}
         <motion.div
           initial={{ display: "none" }}
           animate={{ display: "flex", transition: { delay: 3 } }}
-          className="relative flex-col lg:flex-row items-center justify-center min-w-full min-h-full p-[5%] gap-6 "
+          className="relative flex-col lg:flex-row items-center justify-center w-full p-[5%] gap-6 "
         >
+          {/* EXIT BUTTON */}
+          <div
+            onClick={() => props.exit()}
+            className="top-[85px] right-[25px] absolute p-3 rounded-full bg-white text-2xl exit-btn cursor-pointer hidden xl:block"
+          >
+            <IoCloseOutline />
+          </div>
           {/* LEFT COLUMN CONTENT */}
           <motion.div className="flex w-full lg:basis-4/12 flex-col items-between justify-center gap-4 h-[90vh] ">
             <div className="flex flex-col basis-1/2 gap-4">
               <div className="flex flex-row items-center justify-between basis-1/2 gap-4">
                 {/* BIRTH COUNT CONTAINER */}
-                <div className="bg-white basis-1/2 py-4 px-8 rounded-xl flex items-center justify-center gap-2 flex-col h-full light-shadow">
-                  <h1 className="text-center text-4xl font-bold text-green-400 tracking-wider drop-shadow-md absolute -translate-y-4 green-title">
+                <div className="bg-white basis-1/2 py-4 px-8 rounded-xl flex items-center justify-center gap-2 flex-col h-full light-shadow relative">
+                  <h1 className="text-center text-4xl font-bold text-green-400 tracking-wider drop-shadow-md absolute -translate-y-4 green-title lg:text-lg xl:text-4xl">
                     {props.data.getNameCount}
                   </h1>
                   <p className="text-center text-neutral-300 text-xs font-medium tracking-wider absolute translate-y-4 z-10">
@@ -66,14 +76,14 @@ const Data = (props) => {
                   </p>
                 </div>
                 {/* MOST POPULAR DECADE CONTAINER*/}
-                <div className="bg-white basis-1/2 py-4 px-8 rounded-xl flex items-center justify-center gap-2 flex-col h-full light-shadow">
-                  <h1 className="text-center text-4xl font-bold text-green-400 tracking-wider drop-shadow-md absolute -translate-y-4 green-title">
+                <div className="relative bg-white basis-1/2 py-4 px-8 rounded-xl flex items-center justify-center gap-2 flex-col h-full light-shadow">
+                  <h1 className="text-center text-4xl font-bold text-green-400 tracking-wider drop-shadow-md absolute -translate-y-4 green-title lg:text-lg xl:text-4xl">
                     {props.data.getMostPopularDecade}
                     <span className=" text-neutral-300 font-bold text-lg">
                       s
                     </span>
                   </h1>
-                  <p className="text-neutral-300 text-xs font-medium tracking-wider absolute translate-y-4 z-10">
+                  <p className="text-center text-neutral-300 text-xs font-medium tracking-wider absolute translate-y-4 z-10">
                     most popular decade
                   </p>
                 </div>
@@ -145,7 +155,7 @@ const Data = (props) => {
                       </div>
                       <p className="relative tracking-wide italic text-neutral-400 font-medium flex items-center justify-center">
                         <span className="absolute w-[15px] h-[3px] rounded-xl left-[-25px] bg-[rgba(0,0,0,.1)]"></span>
-                        {popularity.percentage.toFixed(2)}%
+                        {customPopularityRound(popularity.percentage)}%
                       </p>
                     </div>
                     {index !== 4 && (
@@ -168,7 +178,8 @@ const Data = (props) => {
           {/* MIDDLE COLUMN CONTENT */}
           <motion.div className="flex w-full lg:basis-5/12 flex-col items-between justify-center gap-4 h-[90vh] ">
             {/* POPULARITY CONTAINER */}
-            <div className="flex basis-5/12 bg-white light-shadow p-8 rounded-xl flex-row items-center justify-center gap-12">
+            <div className="flex basis-5/12 bg-white light-shadow p-8 rounded-xl flex-row items-center justify-center gap-12 relative overflow-hidden">
+              <span className="popularity-glow"></span>
               <div className="flex flex-col items-center justify-center h-full gap-1 basis-1/2">
                 <div className="flex flex-row items-center justify-center gap-1 text-green-500 text-xs font-medium tracking-wide">
                   <GiRank3 />
@@ -182,8 +193,12 @@ const Data = (props) => {
                 </p>
               </div>
               <div className="basis-1/2 flex flex-col items-center justify-center">
-                <div className="absolute flex items-center justify-center rounded-full p-3 bg-gradient-to-r z-10 from-green-400 via-green-500 to-green-400 w-36 h-36 popularity-container">
-                  <h1 className="text-center text-4xl absolute font-bold text-neutral-800 drop-shadow-md tracking-wider z-10">
+                <div className="absolute flex items-center justify-center rounded-full p-3 bg-gradient-to-r z-10 from-green-400 via-green-500 to-green-400 w-40 h-40 popularity-container">
+                  <h1
+                    className={`text-center absolute font-bold text-neutral-800 drop-shadow-md tracking-wider z-10 ${
+                      popularity < 0.01 ? "text-2xl" : "text-4xl"
+                    }`}
+                  >
                     {popularity}
                     <span className="text-lg font-medium text-neutral-600 ">
                       %
@@ -248,7 +263,7 @@ const Data = (props) => {
                     Data comes from a United States birth dataset
                   </p>
                 </div>
-                <div className="absolute translate-y-32 earth-icon rounded-full">
+                <div className="absolute translate-y-32 lg:translate-y-48 xl:translate-y-32 earth-icon rounded-full">
                   <img
                     src={earth}
                     alt="Earth icon"
@@ -264,34 +279,34 @@ const Data = (props) => {
                   <FaBook />
                   <p>History</p>
                 </div>
-                <h1 className="text-3xl font-bold text-neutral-800 drop-shadow-md tracking-wider">
+                <h1 className="text-3xl lg:text-xl xl:text-3xl font-bold text-neutral-800 drop-shadow-md tracking-wider">
                   Century
                 </h1>
-                <p className="text-center text-neutral-400 font-medium tracking-wider text-xs w-[190px]">
+                <p className="text-center text-neutral-400 font-medium tracking-wider text-xs w-[190px] lg:w-[150px]">
                   See how many people share your name each century.
                 </p>
               </div>
-              <div className="flex flex-row items-center justify-between basis-3/4">
+              <div className="flex flex-row items-center justify-between basis-3/4 flex-wrap">
                 <div className="relative flex flex-col items-center justify-center">
-                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title">
+                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title lg:text-lg xl:text-2xl  ">
                     {props.data.getBirthCountByCentury.century19}
                   </h1>
                   <p className="mt-1 font-medium text-neutral-300 italic tracking-wider">
                     1800s
                   </p>
-                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-15px] h-1/2 w-[3px] rounded-xl "></span>
+                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-15px] h-1/2 w-[3px] rounded-xl lg:hidden xl:block"></span>
                 </div>
                 <div className="relative flex flex-col items-center justify-center">
-                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title">
+                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title  lg:text-lg xl:text-2xl">
                     {props.data.getBirthCountByCentury.century20}
                   </h1>
                   <p className="mt-1 font-medium text-neutral-300 italic tracking-wider">
                     1900s
                   </p>
-                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-15px] h-1/2 w-[3px] rounded-xl "></span>
+                  <span className="absolute bg-[rgba(0,0,0,.1)] right-[-15px] h-1/2 w-[3px] rounded-xl lg:hidden xl:block"></span>
                 </div>
                 <div className="flex flex-col items-center justify-center">
-                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title">
+                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title  lg:text-lg xl:text-2xl">
                     {props.data.getBirthCountByCentury.century21}
                   </h1>
                   <p className="mt-1 font-medium text-neutral-300 tracking-wider italic">
@@ -302,8 +317,39 @@ const Data = (props) => {
             </div>
           </motion.div>
           {/* RIGHT COLUMN CONTENT */}
-          <motion.div className="flex w-full lg:basis-3/12 flex-col items-between justify-start gap-4 h-[90vh] bg-blue-500">
-            <h1>Browse</h1>
+          <motion.div className="flex w-full lg:basis-3/12 flex-col items-between justify-start gap-4 h-[90vh] bg-white light-shadow p-8 rounded-xl">
+            <div className="flex items-center justify-center w-full flex-col">
+              <div className="flex flex-row items-center justify-center gap-1 text-green-400 tracking-wide text-xs font-medium">
+                <VscFileSubmodule />
+                <p>Collection</p>
+              </div>
+              <h1 className="text-3xl drop-shadow-md tracking-wider font-bold text-neutral-800">
+                Browse
+              </h1>
+              <p className="text-neutral-400 text-sm font-medium tracking-wide text-center">
+                Explore other names that are similiar to {props.name}
+              </p>
+              <hr className="w-full h-[2px] mt-2 bg-[rgba(0,0,0,.05)]"></hr>
+            </div>
+            <div className="flex flex-row items-start justify-start flex-wrap gap-2 overflow-y-auto browse-names-container">
+              {props.data.getSimiliarNames.map((similiarName, index) => (
+                <motion.div
+                  whileTap={{ scale: 0.95 }}
+                  key={index}
+                  className="cursor-pointer rounded-md border-2 border-neutral-800 px-3 py-1 text-neutral-600 tracking-wide font-medium text-sm lg:text-xs xl:text-sm shadow-md shadow-neutral-300 transition duration-300 hover:bg-neutral-800 hover:text-green-400"
+                  onClick={() => props.handleBrowseClick(similiarName)}
+                >
+                  <p className="">{similiarName}</p>
+                </motion.div>
+              ))}
+            </div>
+            <div className="book-icon rounded-full relative ">
+              <img
+                src={bookIcon}
+                alt="book icon"
+                className="scale-110 w-[3/4] mx-auto max-w-72"
+              />
+            </div>
           </motion.div>
         </motion.div>
       </motion.div>

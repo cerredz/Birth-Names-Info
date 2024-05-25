@@ -35,6 +35,7 @@ const Landing = () => {
     onCompleted: async (data) => {
       if (!data.isNameRegistered) {
         setIsNameRegisted(false);
+        setIsLoadingData(false);
       } else {
         // name is registered
         // check if user has entered name before via local storage
@@ -197,7 +198,20 @@ const Landing = () => {
 
       {/* DATA IS READY TO BE DISPLAYED */}
       <AnimatePresence>
-        {!isLoadingData && data !== null && <Data data={data} name={name} />}
+        {!isLoadingData && data !== null && (
+          <Data
+            data={data}
+            name={name}
+            handleBrowseClick={(name) => {
+              setData(null);
+              setName(name);
+            }}
+            exit={() => {
+              setData(null);
+              setName("");
+            }}
+          />
+        )}
       </AnimatePresence>
     </div>
   );

@@ -14,7 +14,7 @@ export const customPopularityRound = (popularityPercentage) => {
   if (num < 0.01 && num > 0.000001) {
     return num.toFixed(5);
   } else if (num < 0.000001) {
-    return num.toFixed(10);
+    return num.toFixed(7);
   } else {
     return num.toFixed(2);
   }
