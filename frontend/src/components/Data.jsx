@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { delay, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import "../styles/data.css";
 import boyIcon from "../images/boy.png";
 import girlIcon from "../images/girl.png";
@@ -52,13 +52,13 @@ const Data = (props) => {
           width: `0`,
           transition: { delay: 2.6, duration: 0.5 },
         }}
-        className="origin-center rounded-xl bg-[rgba(0,0,0,.05)] backdrop-blur-lg relative flex items-center justify-center  "
+        className="rounded-xl bg-[rgba(0,0,0,.05)] backdrop-blur-lg relative flex items-center justify-center "
       >
         {/* DATA CONTENT CONTAINER */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 0.5, delay: 5 } }}
-          className="relative flex-col lg:flex-row items-center justify-center w-full px-[5%] gap-6  "
+          className="relative flex flex-col lg:flex-row items-center justify-center w-full px-[5%] gap-6 "
         >
           {/* EXIT BUTTON */}
           <div
@@ -68,7 +68,7 @@ const Data = (props) => {
             <IoCloseOutline />
           </div>
           {/* LEFT COLUMN CONTENT */}
-          <motion.div className="flex w-full lg:basis-4/12 flex-col items-between justify-center gap-4 h-[90vh] ">
+          <motion.div className="flex w-full lg:basis-4/12 flex-col items-between justify-center gap-4 h-[90vh] mt-8 lg:mt-0 ">
             <div className="flex flex-col basis-1/2 gap-4">
               <div className="flex flex-row items-center justify-between basis-1/2 gap-4">
                 {/* BIRTH COUNT CONTAINER */}
@@ -220,7 +220,7 @@ const Data = (props) => {
                 opacity: 0,
                 transition: { duration: 0.4, delay: 1.2 },
               }}
-              className="origin-center flex basis-1/2 light-shadow bg-white rounded-xl flex-col items-center justify-between pt-1 pb-6 px-6"
+              className="origin-center flex basis-1/2 light-shadow bg-white rounded-xl flex-col items-center justify-between pt-1 pb-6 px-6 mb-8 lg:mb-0"
             >
               {/* TITLE */}
               <div className="py-3 flex flex-col items-center justify-center w-full ">
@@ -404,7 +404,7 @@ const Data = (props) => {
                 </motion.p>
               </div>
             </motion.div>
-            <div className="flex basis-5/12 flex-col sm:flex-row items-center jsutify-between gap-4">
+            <div className="flex basis-5/12 flex-col sm:flex-row items-center justify-between gap-4">
               {/* PERCENTILE CONTAINER */}
               <motion.div
                 initial={{ scale: 0, opacity: 0 }}
