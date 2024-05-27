@@ -311,7 +311,7 @@ const Data = (props) => {
             </motion.div>
           </motion.div>
           {/* MIDDLE COLUMN CONTENT */}
-          <motion.div className="flex w-full lg:basis-5/12 flex-col items-between justify-center gap-4 h-[90vh] ">
+          <motion.div className="flex w-full lg:basis-5/12 flex-col items-between justify-center gap-4 lg:h-[90vh] ">
             {/* POPULARITY CONTAINER */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
@@ -325,7 +325,7 @@ const Data = (props) => {
                 opacity: 0,
                 transition: { duration: 0.4, delay: 1.5 },
               }}
-              className="origin-center flex basis-5/12 bg-white light-shadow p-8 rounded-xl flex-row items-center justify-center gap-12 relative overflow-hidden"
+              className="origin-center flex lg:basis-5/12 bg-white light-shadow py-16 px-4 rounded-xl flex-row items-center justify-center gap-12 relative overflow-hidden"
             >
               <span className="popularity-glow"></span>
               <div className="flex flex-col items-center justify-center h-full gap-1 basis-1/2">
@@ -540,7 +540,7 @@ const Data = (props) => {
                   opacity: 0,
                   transition: { duration: 0.4, delay: 0.6 },
                 }}
-                className="origin-center overflow-hidden flex basis-1/2 h-full bg-white light-shadow rounded-xl flex-col items-center justify-between relative"
+                className="origin-center overflow-hidden flex basis-1/2 h-full bg-white light-shadow rounded-xl flex-col items-center justify-between relative sm:min-h-[18.5rem]"
               >
                 <div className="flex flex-col items-center justify-center gap-1 mt-8 z-10">
                   <motion.h1
@@ -572,7 +572,7 @@ const Data = (props) => {
                     opacity: 1,
                     transition: { duration: 0.4, delay: 4.3 },
                   }}
-                  className="relative sm:absolute sm:translate-y-32 lg:translate-y-48 xl:translate-y-32 earth-icon rounded-full"
+                  className="relative sm:absolute md:translate-y-32 lg:translate-y-48 xl:translate-y-32 earth-icon rounded-full "
                 >
                   <img
                     src={earth}
@@ -595,7 +595,7 @@ const Data = (props) => {
                 opacity: 0,
                 transition: { duration: 0.4, delay: 0.3 },
               }}
-              className="basis-2/12 py-3 px-6 rounded-xl flex flex-row items-center justify-between bg-white light-shadow gap-6"
+              className="lg:basis-2/12 py-3 px-6 rounded-xl flex flex-col md:flex-row items-center justify-between bg-white light-shadow gap-6"
             >
               <div className="flex flex-col items-center justify-center basis-1/4">
                 <motion.div
@@ -633,7 +633,7 @@ const Data = (props) => {
                   See how many people share your name each century.
                 </motion.p>
               </div>
-              <div className="flex flex-row items-center justify-between basis-3/4">
+              <div className="flex flex-row items-center justify-between basis-3/4 gap-12 lg:gap-0 flex-wrap">
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{
@@ -643,7 +643,7 @@ const Data = (props) => {
                   }}
                   className="origin-center relative flex flex-col items-center justify-center"
                 >
-                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title lg:text-lg xl:text-2xl  ">
+                  <h1 className="text-xl sm:text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title lg:text-lg xl:text-2xl  ">
                     {props.data.getBirthCountByCentury.century19}
                   </h1>
                   <p className="mt-1 font-medium text-neutral-300 italic tracking-wider">
@@ -660,7 +660,7 @@ const Data = (props) => {
                   }}
                   className="relative flex flex-col items-center justify-center"
                 >
-                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title  lg:text-lg xl:text-2xl">
+                  <h1 className="sm:text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title text-xl lg:text-lg xl:text-2xl">
                     {props.data.getBirthCountByCentury.century20}
                   </h1>
                   <p className="mt-1 font-medium text-neutral-300 italic tracking-wider">
@@ -677,7 +677,7 @@ const Data = (props) => {
                   }}
                   className="flex flex-col items-center justify-center"
                 >
-                  <h1 className="text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title  lg:text-lg xl:text-2xl">
+                  <h1 className="text-xl sm:text-2xl font-bold text-green-400 tracking-wider drop-shadow-md green-title  lg:text-lg xl:text-2xl">
                     {props.data.getBirthCountByCentury.century21}
                   </h1>
                   <p className="mt-1 font-medium text-neutral-300 tracking-wider italic">
