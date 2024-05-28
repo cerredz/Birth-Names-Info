@@ -40,6 +40,10 @@ async function initServer() {
     console.log("Error Connecting to the MongoDB Database: ", error);
   }
 
+  app.use("/", (req, res) => {
+    res.send("Server is running...");
+  });
+
   app.listen(PORT, () => {
     console.log(`Express Server Successfully Running on Port: ${PORT}`);
   });
