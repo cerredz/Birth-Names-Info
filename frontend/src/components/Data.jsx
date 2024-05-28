@@ -56,8 +56,8 @@ const Data = (props) => {
       >
         {/* DATA CONTENT CONTAINER */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 0.5, delay: 5 } }}
+          initial={{ display: "none" }}
+          animate={{ display: "flex", transition: { delay: 1.9 } }}
           className="relative flex flex-col lg:flex-row items-center justify-center w-full px-[5%] gap-6 "
         >
           {/* EXIT BUTTON */}
