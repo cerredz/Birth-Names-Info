@@ -21,6 +21,7 @@ async function initServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    cache: "bounded",
   });
   await server.start();
   server.applyMiddleware({ app });
