@@ -58,4 +58,4 @@ TODO:
 - in your resolver function, create an asynchronous funcition that returns the wanted collection *Recipes* for example
 */
 
-initServer();
+await initServer();
