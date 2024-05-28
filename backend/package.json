@@ -20,5 +20,8 @@
     "graphql": "^16.8.1",
     "mongoose": "^8.3.5",
     "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vercel/node": "^3.1.5"
   }
 }
