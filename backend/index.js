@@ -32,11 +32,7 @@ async function initServer() {
   // connect to MongoDB Database
   try {
     await mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
-    //await initializeDatabase();
     console.log("Successfully Connected to MongoDB Database");
-    //await getMostPopularDecadeHelper("Michael");
-
-    //await getBirthCountByCenturyHelper("Michael");
   } catch (error) {
     console.log("Error Connecting to the MongoDB Database: ", error);
   }
