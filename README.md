@@ -6,6 +6,8 @@ Birth Names info is a full-stack application that takes in a name input from the
 
 Built with React, MongoDB, Node.js, Express.js, Tailwind Css, GraphQL, Framer Motion, Apollo Server, csv-parser, Mongoose, Figma
 
+Visual demo + code breakdown -> [YouTube] (https://www.youtube.com/watch?v=Jm3i6asXwkE)
+
 ## Project Demo 🔍
 
 https://github.com/cerredz/Birth-Names-Info/assets/110927971/d0c7e8fb-a224-4f93-a5cb-9c2543beb4f5
