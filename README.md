@@ -4,9 +4,9 @@ Birth Names info is a full-stack application that takes in a name input from the
 
 ## Links 🔗
 
-Visual demo + code breakdown -> [YouTube] (https://www.youtube.com/watch?v=Jm3i6asXwkE)
+Visual demo + code breakdown -> https://www.youtube.com/watch?v=Jm3i6asXwkE
 
-Database I used -> [Kaggle Database] (https://www.kaggle.com/datasets/kaggle/us-baby-names)
+Database I used -> https://www.kaggle.com/datasets/kaggle/us-baby-names
 
 ## Technologies 💻
 
